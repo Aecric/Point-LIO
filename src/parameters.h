@@ -64,6 +64,8 @@ extern shared_ptr<Preprocess> p_pre;
 extern shared_ptr<ImuProcess> p_imu;
 extern bool is_first_frame;
 
+extern std::string map_save_path, map_save_name;
+
 extern std::vector<double> extrinT;
 extern std::vector<double> extrinR;
 extern double time_diff_lidar_to_imu;

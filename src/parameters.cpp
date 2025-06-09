@@ -30,6 +30,9 @@ int    lidar_type, pcd_save_interval;
 std::vector<double> gravity_init, gravity;
 bool   runtime_pos_log, pcd_save_en, path_en, extrinsic_est_en = true;
 bool   scan_pub_en, scan_body_pub_en;
+
+std::string map_save_path, map_save_name;
+
 shared_ptr<Preprocess> p_pre;
 shared_ptr<ImuProcess> p_imu;
 double time_update_last = 0.0, time_current = 0.0, time_predict_last_const = 0.0, t_last = 0.0;
@@ -101,10 +104,16 @@ void readParameters(shared_ptr<rclcpp::Node> &nh)
   nh->declare_parameter<bool>("runtime_pos_log_enable", false);
   nh->declare_parameter<bool>("pcd_save.pcd_save_en", false);
   nh->declare_parameter<int>("pcd_save.interval", -1);
+  nh->declare_parameter<std::string>("pcd_save.map_path", "");
+  nh->declare_parameter<std::string>("pcd_save.map_name", "");
+  nh->declare_parameter<int>("pcd_save.interval", -1);
   nh->declare_parameter<double>("mapping.lidar_time_inte", 0.1);
   nh->declare_parameter<float>("mapping.ivox_grid_resolution", 0.2);
   nh->declare_parameter<int>("ivox_nearby_type", 18);
 
+
+
+  
   nh->get_parameter("prop_at_freq_of_imu", prop_at_freq_of_imu);
   nh->get_parameter("use_imu_as_input", use_imu_as_input);
   nh->get_parameter("check_satu", check_satu);
@@ -155,6 +164,9 @@ void readParameters(shared_ptr<rclcpp::Node> &nh)
   nh->get_parameter("publish.scan_bodyframe_pub_en", scan_body_pub_en);
   nh->get_parameter("runtime_pos_log_enable", runtime_pos_log);
   nh->get_parameter("pcd_save.pcd_save_en", pcd_save_en);
+
+  nh->get_parameter("pcd_save.map_path", map_save_path);
+  nh->get_parameter("pcd_save.map_name", map_save_name);
   nh->get_parameter("pcd_save.interval", pcd_save_interval);
   nh->get_parameter("mapping.lidar_time_inte", lidar_time_inte);
   nh->get_parameter("mapping.lidar_meas_cov", laser_point_cov);

@@ -8,6 +8,15 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     # Declare the RViz argument
+
+     # 参数声明
+    slam_arg = DeclareLaunchArgument( 
+        'slam', 
+        default_value='true',
+        description='Enable/disable SLAM mode'
+    )
+
+
     rviz_arg = DeclareLaunchArgument(
         'rviz', default_value='true',
         description='Flag to launch RViz.')
@@ -18,7 +27,9 @@ def generate_launch_description():
             FindPackageShare('point_lio'),
             'config', 'velody16.yaml'
         ]),
-        {
+        { 
+            'slam': LaunchConfiguration('slam'),  # 参数绑定
+
             'use_imu_as_input': False,  # Change to True to use IMU as input of Point-LIO
             'prop_at_freq_of_imu': True,
             'check_satu': True,
@@ -57,6 +68,9 @@ def generate_launch_description():
 
     # Assemble the launch description
     ld = LaunchDescription([
+
+        slam_arg,  # 声明参数
+
         rviz_arg,
         laser_mapping_node,
         GroupAction(
