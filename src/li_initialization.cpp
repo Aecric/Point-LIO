@@ -87,7 +87,7 @@ void standard_pcl_cbk(const sensor_msgs::msg::PointCloud2::SharedPtr & msg)
   // sig_buffer.notify_all();
 }
 
-void livox_pcl_cbk(const livox_ros_driver2::msg::CustomMsg::SharedPtr & msg)
+void livox_pcl_cbk(const point_lio::msg::CustomMsg::SharedPtr & msg)
 {
   // mtx_buffer.lock();
   double preprocess_start_time = omp_get_wtime();

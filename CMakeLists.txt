@@ -52,7 +52,14 @@ find_package(visualization_msgs REQUIRED)
 find_package(pcl_ros REQUIRED)
 find_package(pcl_conversions REQUIRED)
 find_package(tf2_ros REQUIRED)
-find_package(livox_ros_driver2 REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/CustomPoint.msg"
+  "msg/CustomMsg.msg"
+  DEPENDENCIES std_msgs
+)
 find_package(Eigen3 REQUIRED)
 find_package(OpenMP QUIET)
 find_package(PythonLibs REQUIRED) # Consider using Pybind11 for ROS2
@@ -95,10 +102,10 @@ ament_target_dependencies(pointlio_mapping
   pcl_ros
   pcl_conversions
   tf2_ros
-  livox_ros_driver2
 )
 
 target_link_libraries(pointlio_mapping ${PCL_LIBRARIES} ${PYTHON_LIBRARIES})
+rosidl_target_interfaces(pointlio_mapping ${PROJECT_NAME} "rosidl_typesupport_cpp")
 target_include_directories(pointlio_mapping PRIVATE ${PYTHON_INCLUDE_DIRS})
 
 # Install the executable
@@ -122,7 +129,7 @@ ament_export_dependencies(
   pcl_ros
   pcl_conversions
   tf2_ros
-  livox_ros_driver2
+  std_msgs
   Eigen3
   PCL
 )

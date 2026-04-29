@@ -31,7 +31,7 @@ extern double T1[MAXN], s_plot[MAXN], s_plot2[MAXN], s_plot3[MAXN], s_plot11[MAX
 // extern sensor_msgs::msg::Imu::ConstSharedPtr imu_last_ptr;
 
 void standard_pcl_cbk(const sensor_msgs::msg::PointCloud2::SharedPtr & msg);
-void livox_pcl_cbk(const livox_ros_driver2::msg::CustomMsg::SharedPtr & msg);
+void livox_pcl_cbk(const point_lio::msg::CustomMsg::SharedPtr & msg);
 void imu_cbk(const sensor_msgs::msg::Imu::ConstSharedPtr & msg_in);
 bool sync_packages(MeasureGroup & meas);
 

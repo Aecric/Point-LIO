@@ -42,7 +42,7 @@ void Preprocess::set(bool feat_en, int lid_type, double bld, int pfilt_num)
 }
 
 void Preprocess::process(
-  const livox_ros_driver2::msg::CustomMsg::SharedPtr & msg, PointCloudXYZI::Ptr & pcl_out)
+  const point_lio::msg::CustomMsg::SharedPtr & msg, PointCloudXYZI::Ptr & pcl_out)
 {
   avia_handler(msg);
   *pcl_out = pl_surf;
@@ -90,7 +90,7 @@ void Preprocess::process(
 }
 
 void Preprocess::process_cut_frame_livox(
-  const livox_ros_driver2::msg::CustomMsg::SharedPtr & msg, deque<PointCloudXYZI::Ptr> & pcl_out,
+  const point_lio::msg::CustomMsg::SharedPtr & msg, deque<PointCloudXYZI::Ptr> & pcl_out,
   deque<double> & time_lidar, const int required_frame_num, int scan_count)
 {
   int plsize = msg->point_num;
@@ -317,7 +317,7 @@ void Preprocess::process_cut_frame_pcl2(
   }
 }
 
-void Preprocess::avia_handler(const livox_ros_driver2::msg::CustomMsg::SharedPtr & msg)
+void Preprocess::avia_handler(const point_lio::msg::CustomMsg::SharedPtr & msg)
 {
   pl_surf.clear();
   pl_corn.clear();

@@ -15,7 +15,7 @@
 #include <cstring>
 #include <fstream>
 #include <geometry_msgs/msg/vector3.hpp>
-#include <livox_ros_driver2/msg/custom_msg.hpp>
+#include "point_lio/msg/custom_msg.hpp"
 #include <mutex>
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/imu.hpp>

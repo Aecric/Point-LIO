@@ -1,7 +1,7 @@
 #include <pcl_conversions/pcl_conversions.h>
 
 #include <deque>
-#include <livox_ros_driver2/msg/custom_msg.hpp>
+#include <point_lio/msg/custom_msg.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/point_cloud2.hpp>
 
@@ -105,11 +105,11 @@ class Preprocess
   Preprocess();
   ~Preprocess();
   
-  void process_cut_frame_livox(const livox_ros_driver2::msg::CustomMsg::SharedPtr &msg, deque<PointCloudXYZI::Ptr> &pcl_out, deque<double> &time_lidar, const int required_frame_num, int scan_count);
+  void process_cut_frame_livox(const point_lio::msg::CustomMsg::SharedPtr &msg, deque<PointCloudXYZI::Ptr> &pcl_out, deque<double> &time_lidar, const int required_frame_num, int scan_count);
   
   void process_cut_frame_pcl2(const sensor_msgs::msg::PointCloud2::SharedPtr &msg, deque<PointCloudXYZI::Ptr> &pcl_out, deque<double> &time_lidar, const int required_frame_num, int scan_count);
  
-  void process(const livox_ros_driver2::msg::CustomMsg::SharedPtr &msg, PointCloudXYZI::Ptr &pcl_out);
+  void process(const point_lio::msg::CustomMsg::SharedPtr &msg, PointCloudXYZI::Ptr &pcl_out);
   void process(const sensor_msgs::msg::PointCloud2::SharedPtr &msg, PointCloudXYZI::Ptr &pcl_out);
   void set(bool feat_en, int lid_type, double bld, int pfilt_num);
 
@@ -123,7 +123,7 @@ class Preprocess
   bool given_offset_time;
 
   private:
-  void avia_handler(const livox_ros_driver2::msg::CustomMsg::SharedPtr &msg);
+  void avia_handler(const point_lio::msg::CustomMsg::SharedPtr &msg);
   void oust64_handler(const sensor_msgs::msg::PointCloud2::SharedPtr &msg);
   void velodyne_handler(const sensor_msgs::msg::PointCloud2::SharedPtr &msg);
   void hesai_handler(const sensor_msgs::msg::PointCloud2::SharedPtr &msg);
